@@ -1,0 +1,13 @@
+version: '1.0'
+
+services:
+  db-gestion-facture:
+    image: postgres
+    environment:
+      - POSTGRES_USER=web-api
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/volumes/gestion/facturation/web-api/postgresql/:/var/lib/postgresql/data/
