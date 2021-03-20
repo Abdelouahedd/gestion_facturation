@@ -18,7 +18,7 @@ public class Facture extends AbstractAuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double total;
-    @OneToOne(targetEntity = Document.class,fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = Document.class,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "document_id")
     private Document document;
     private Boolean complete = false;
