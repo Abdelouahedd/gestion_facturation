@@ -1,7 +1,6 @@
 package com.ae.gestion.facture.document.domaine;
 
 import com.ae.gestion.facture.commun.domaine.AbstractAuditingEntity;
-import com.ae.gestion.facture.facture.domaine.Facture;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Where;
@@ -18,6 +17,4 @@ public class Document extends AbstractAuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String document;
-    @OneToOne(mappedBy = "document", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Facture facture;
 }
