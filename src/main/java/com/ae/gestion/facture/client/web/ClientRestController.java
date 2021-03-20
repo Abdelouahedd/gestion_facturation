@@ -23,11 +23,6 @@ public class ClientRestController {
         return this.clientService.getClients(pageable);
     }
 
-    @GetMapping(path = "/clients")
-    public List<Client> getAllClient() {
-        return this.clientService.getClients();
-    }
-
     @GetMapping(path = "/client/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable("id") Long id) {
         Client client = this.clientService.getClient(id);
@@ -52,7 +47,7 @@ public class ClientRestController {
         return ResponseEntity.ok(savedClient);
     }
 
-    @GetMapping(path = "/client/{id}")
+    @DeleteMapping(path = "/client/{id}")
     public ResponseEntity<Void> deleteClientById(@PathVariable("id") Long id) {
         this.clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
