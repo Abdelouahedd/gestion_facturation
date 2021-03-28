@@ -1,6 +1,6 @@
-package com.ae.gestion.security.repository;
+package com.ae.gestion.facture.security.repository;
 
-import com.ae.gestion.security.domaine.UserClient;
+import com.ae.gestion.facture.security.domaine.UserClient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

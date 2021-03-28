@@ -1,4 +1,4 @@
-package com.ae.gestion.security.jwt;
+package com.ae.gestion.facture.security.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

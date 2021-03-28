@@ -1,8 +1,8 @@
-package com.ae.gestion.security.web;
+package com.ae.gestion.facture.security.web;
 
-import com.ae.gestion.security.domaine.UserClient;
-import com.ae.gestion.security.service.UserClientService;
-import com.ae.gestion.security.web.dto.AuthenticationResp;
+import com.ae.gestion.facture.security.domaine.UserClient;
+import com.ae.gestion.facture.security.service.UserClientService;
+import com.ae.gestion.facture.security.web.dto.AuthenticationResp;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,15 +1,16 @@
-package com.ae.gestion.security.service;
+package com.ae.gestion.facture.security.service;
 
-import com.ae.gestion.security.domaine.UserClient;
-import com.ae.gestion.security.jwt.JwtConfig;
-import com.ae.gestion.security.jwt.JwtUtil;
-import com.ae.gestion.security.repository.UserRepository;
-import com.ae.gestion.security.web.dto.AuthenticationResp;
+import com.ae.gestion.facture.security.domaine.UserClient;
+import com.ae.gestion.facture.security.jwt.JwtConfig;
+import com.ae.gestion.facture.security.jwt.JwtUtil;
+import com.ae.gestion.facture.security.repository.UserRepository;
+import com.ae.gestion.facture.security.web.dto.AuthenticationResp;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,7 @@ public class UserClientService {
     private final ApplicationUserService applicationUserService;
     private final JwtUtil jwtUtil;
     private final JwtConfig jwtConfig;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthenticationResp login(UserClient login) throws BadCredentialsException {
         try {
@@ -52,6 +54,9 @@ public class UserClientService {
 
     public UserClient addUser(UserClient userClient) throws Exception {
         try {
+            String password = userClient.getPassword();
+            String newPassword = passwordEncoder.encode(password);
+            userClient.setPassword(newPassword);
             return this.userRepository.saveAndFlush(userClient);
         } catch (Exception e) {
             throw new Exception("User not saved");

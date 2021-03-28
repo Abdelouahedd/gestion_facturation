@@ -1,4 +1,4 @@
-package com.ae.gestion.security.jwt;
+package com.ae.gestion.facture.security.jwt;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpHeaders;

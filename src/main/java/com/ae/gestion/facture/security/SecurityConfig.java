@@ -1,7 +1,7 @@
-package com.ae.gestion.security;
+package com.ae.gestion.facture.security;
 
-import com.ae.gestion.security.filters.JwtAutorizationFilter;
-import com.ae.gestion.security.service.ApplicationUserService;
+import com.ae.gestion.facture.security.filters.JwtAutorizationFilter;
+import com.ae.gestion.facture.security.service.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

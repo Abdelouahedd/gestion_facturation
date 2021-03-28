@@ -1,4 +1,4 @@
-package com.ae.gestion.security.web.dto;
+package com.ae.gestion.facture.security.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

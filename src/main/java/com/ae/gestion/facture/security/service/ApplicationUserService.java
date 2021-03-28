@@ -1,7 +1,7 @@
-package com.ae.gestion.security.service;
+package com.ae.gestion.facture.security.service;
 
-import com.ae.gestion.security.domaine.UserClient;
-import com.ae.gestion.security.repository.UserRepository;
+import com.ae.gestion.facture.security.domaine.UserClient;
+import com.ae.gestion.facture.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
