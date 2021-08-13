@@ -36,13 +36,13 @@ public class ClientRestController {
     }
 
     @PostMapping(path = "/client")
-    public ResponseEntity<Client> addClient(Client client) {
+    public ResponseEntity<Client> addClient(@RequestBody Client client) {
         Client savedClient = this.clientService.addClient(client);
         return ResponseEntity.ok(savedClient);
     }
 
-    @PutMapping(path = "/client")
-    public ResponseEntity<Client> updateClient(Client client) {
+    @PutMapping(path = "/client/{id}")
+    public ResponseEntity<Client> updateClient(@RequestBody Client client) {
         Client savedClient = this.clientService.updateClient(client);
         return ResponseEntity.ok(savedClient);
     }
