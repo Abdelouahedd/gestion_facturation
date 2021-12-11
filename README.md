@@ -50,8 +50,8 @@ The project contains a small application for managing invoices, it contains oper
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Feature 1;Create the main of application as domains with service and the end point
-:heavy_check_mark: Feature 2;Create the configuration of spring security for manging the security of the app
+:heavy_check_mark: Feature 1 Create the main of application as domains with service and the end point;<br>
+:heavy_check_mark: Feature 2 Create the configuration of spring security for manging the security of the app;<br>
 :heavy_check_mark: Feature 3;
 
 ## :rocket: Technologies ##
