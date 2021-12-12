@@ -3,21 +3,22 @@ package com.ae.gestion.facture.client.service;
 import com.ae.gestion.facture.client.domaine.Client;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
 public interface ClientService {
-    Client addClient(Client client);
+  Client addClient(Client client);
 
-    Client updateClient(Client client);
+  Client updateClient(Client client);
 
-    Client getClient(Long id);
+  Client getClient(Long id);
 
-    Client getClient(String nom);
+  Page<Client> getClient(Specification specification, Pageable pageable) ;
 
-    List<Client> getClients();
+  List<Client> getClients();
 
-    Page<Client> getClients(Pageable pageable);
+  Page<Client> getClients(Pageable pageable);
 
-    void deleteClient(Long id);
+  void deleteClient(Long id);
 }
