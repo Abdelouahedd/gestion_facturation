@@ -1,6 +1,6 @@
 package com.ae.gestion.facture.security;
 
-import com.ae.gestion.facture.security.filters.JwtAutorizationFilter;
+import com.ae.gestion.facture.security.filters.JwtAuthorizationFilter;
 import com.ae.gestion.facture.security.service.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,51 +25,51 @@ import java.util.Collections;
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final ApplicationUserService userDetailsService;
-    private final JwtAutorizationFilter jwtAutorizationFilter;
+  private final ApplicationUserService userDetailsService;
+  private final JwtAuthorizationFilter jwtAuthorizationFilter;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();// disactiver security statfull (SESSION ID)
-        http.headers().frameOptions().disable();// poretection vers les frames
-        http.cors().and()
-                .authorizeRequests()
-                .antMatchers("/api/login",
-                        "/api/user/signup",
-                        "/api/refreshToken",
-                        "/api/**/downloadFile/**/")
-                .permitAll();// permet URL /signup
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);// ACTIVER MODE AUTH STATELESS
-        http.authorizeRequests().anyRequest().authenticated();// forcer authentification pour les autres url
-        http.addFilterBefore(jwtAutorizationFilter, UsernamePasswordAuthenticationFilter.class);// ajouter filtre jwt
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.csrf().disable();// disactiver security statfull (SESSION ID)
+    http.headers().frameOptions().disable();// poretection vers les frames
+    http.cors().and()
+      .authorizeRequests()
+      .antMatchers("/api/login",
+        "/api/user/signup",
+        "/api/refreshToken",
+        "/api/**/downloadFile/**/")
+      .permitAll();// permet URL /signup
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);// ACTIVER MODE AUTH STATELESS
+    http.authorizeRequests().anyRequest().authenticated();// forcer authentification pour les autres url
+    http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);// ajouter filtre jwt
+  }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService);
+  }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder(10);
+  }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
-        configuration.addAllowedHeader("*");
-        configuration.setExposedHeaders(Collections.singletonList("x-auth-token"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Collections.singletonList("*"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
+    configuration.addAllowedHeader("*");
+    configuration.setExposedHeaders(Collections.singletonList("x-auth-token"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
 }

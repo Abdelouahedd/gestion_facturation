@@ -1,5 +1,6 @@
 package com.ae.gestion.facture.security.service;
 
+import com.ae.gestion.facture.exceptions.AuthenticationException;
 import com.ae.gestion.facture.security.domaine.UserClient;
 import com.ae.gestion.facture.security.jwt.JwtConfig;
 import com.ae.gestion.facture.security.jwt.JwtUtil;
