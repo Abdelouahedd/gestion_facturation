@@ -7,4 +7,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface DocumentService {
     Document storeFile(MultipartFile file) throws Exception;
     Resource loadFileAsResource(String fileName) throws Exception;
+    Document getDocument(Long id);
 }

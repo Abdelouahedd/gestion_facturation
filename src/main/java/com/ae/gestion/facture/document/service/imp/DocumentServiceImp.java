@@ -81,4 +81,9 @@ public class DocumentServiceImp implements DocumentService {
             throw new Exception("File not found " + fileName, ex);
         }
     }
+
+  @Override
+  public Document getDocument(Long id) {
+    return this.documentRepository.getOne(id);
+  }
 }
