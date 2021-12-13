@@ -2,13 +2,19 @@ package com.ae.gestion.facture.facture.service;
 
 
 import com.ae.gestion.facture.facture.domaine.Facture;
+import com.ae.gestion.facture.facture.web.request.FactureRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 public interface FactureService {
-    Facture createFacture(Facture facture);
+  Facture createFacture(FactureRequest factureRequest);
 
-    Facture updateFacture(Facture facture, Long id);
+  Facture updateFacture(FactureRequest facture, Long id);
 
-    Facture getFacture(Long id);
+  Facture getFacture(Long id);
 
-    Facture getFacture(Double total);
+  Facture getFacture(Double total);
+
+  Page<Facture> findAll(Specification specification, Pageable pageable);
 }

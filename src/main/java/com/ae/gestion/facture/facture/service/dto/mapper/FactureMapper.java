@@ -1,0 +1,15 @@
+package com.ae.gestion.facture.facture.service.dto.mapper;
+
+import com.ae.gestion.facture.facture.web.request.FactureRequest;
+import com.ae.gestion.facture.facture.domaine.Facture;
+import org.mapstruct.*;
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+public interface FactureMapper {
+  Facture factureRequestToFacture(FactureRequest factureRequest);
+
+  FactureRequest factureToFactureRequest(Facture facture);
+
+  @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+  void updateFactureFromFactureRequest(FactureRequest factureRequest, @MappingTarget Facture facture);
+}
