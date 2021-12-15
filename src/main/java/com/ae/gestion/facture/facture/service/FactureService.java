@@ -16,5 +16,5 @@ public interface FactureService {
 
   Facture getFacture(Double total);
 
-  Page<Facture> findAll(Specification specification, Pageable pageable);
+  Page<Facture> findAll(Specification<Facture> specification, Pageable pageable);
 }
