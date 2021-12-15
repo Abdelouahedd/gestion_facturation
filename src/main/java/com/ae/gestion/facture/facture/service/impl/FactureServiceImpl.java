@@ -8,13 +8,17 @@ import com.ae.gestion.facture.facture.service.FactureService;
 import com.ae.gestion.facture.facture.service.dto.mapper.FactureMapper;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
+@Log4j2
 public class FactureServiceImpl implements FactureService {
   private final FactureRepository factureRepository;
   private final FactureMapper factureMapper;
@@ -22,17 +26,26 @@ public class FactureServiceImpl implements FactureService {
 
   @Override
   public Facture createFacture(FactureRequest factureRequest) {
-    Facture facture = factureMapper.factureRequestToFacture(factureRequest);
-    Document document = this.documentService.getDocument(factureRequest.getDocumentId());
-    facture.setDocument(document);
+    Facture facture = extractFacture(factureMapper, factureRequest, this.documentService);
     return this.factureRepository.saveAndFlush(facture);
+  }
+
+  private Facture extractFacture(FactureMapper factureMapper, FactureRequest factureRequest, DocumentService documentService) {
+    Facture facture = factureMapper.factureRequestToFacture(factureRequest);
+    Optional<Long> idDoc = Optional.ofNullable(factureRequest.getDocumentId());
+    System.out.println(idDoc);
+    idDoc.ifPresentOrElse(
+      (documentId) -> {
+        Document document = documentService.getDocument(documentId);
+        facture.setDocument(document);
+      },
+      () -> log.info("No document for the invoice"));
+    return facture;
   }
 
   @Override
   public Facture updateFacture(FactureRequest factureRequest, Long id) {
-    Facture facture = factureMapper.factureRequestToFacture(factureRequest);
-    Document document = this.documentService.getDocument(factureRequest.getDocumentId());
-    facture.setDocument(document);
+    Facture facture = extractFacture(factureMapper, factureRequest, this.documentService);
     facture.setId(id);
     return this.factureRepository.saveAndFlush(facture);
   }
@@ -50,7 +63,7 @@ public class FactureServiceImpl implements FactureService {
   }
 
   @Override
-  public Page<Facture> findAll(Specification specification, Pageable pageable) {
+  public Page<Facture> findAll(Specification<Facture> specification, Pageable pageable) {
     return this.factureRepository.findAll(specification, pageable);
   }
 }
