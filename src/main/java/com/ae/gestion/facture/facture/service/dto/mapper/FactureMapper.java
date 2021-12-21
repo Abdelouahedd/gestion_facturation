@@ -1,5 +1,6 @@
 package com.ae.gestion.facture.facture.service.dto.mapper;
 
+import com.ae.gestion.facture.facture.service.dto.FactureDto;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import com.ae.gestion.facture.facture.domaine.Facture;
 import org.mapstruct.*;
@@ -7,6 +8,8 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface FactureMapper {
   Facture factureRequestToFacture(FactureRequest factureRequest);
+
+  FactureDto factureToFactureDto(Facture facture);
 
   FactureRequest factureToFactureRequest(Facture facture);
 

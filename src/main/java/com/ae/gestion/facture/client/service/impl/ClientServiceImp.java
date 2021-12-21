@@ -58,8 +58,6 @@ public class ClientServiceImp implements ClientService {
 
   @Override
   public void deleteClient(Long id) {
-    Client client = this.getClient(id);
-    client.setState(StateEnum.DELETED);
-    this.clientRepository.save(client);
+    this.clientRepository.deleteById(id);
   }
 }
