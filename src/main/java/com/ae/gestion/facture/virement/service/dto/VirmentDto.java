@@ -7,7 +7,5 @@ import lombok.Data;
 public class VirmentDto {
     private Double total;
     private Document document;
-    private String nom;
-    private String prenom;
     private Double virment;
 }

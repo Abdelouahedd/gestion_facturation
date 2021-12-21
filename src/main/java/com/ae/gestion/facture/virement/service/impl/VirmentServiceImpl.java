@@ -21,14 +21,12 @@ import org.springframework.stereotype.Service;
 public class VirmentServiceImpl implements VirmentService {
   private final VirmentRepository virmentRepository;
   private final FactureRepository factureRepository;
-  private final ClientService clientService;
   private final VirmentMapper virmentMapper;
 
   @Override
   public VirmentDto addVirment(VirmentRequest virmentRequest) {
     Facture facture = this.factureRepository.getOne(virmentRequest.getIdFacture());
-    Client client = this.clientService.getClient(virmentRequest.getIdClient());
-    Virment virment = prepareVirment(virmentRequest, facture, client);
+    Virment virment = prepareVirment(virmentRequest, facture);
     return this.virmentMapper.virmentToVirmentDTO(this.virmentRepository.saveAndFlush(virment));
   }
 
@@ -39,9 +37,8 @@ public class VirmentServiceImpl implements VirmentService {
       .map(this.virmentMapper::virmentToVirmentDTO);
   }
 
-  private Virment prepareVirment(VirmentRequest virmentRequest, Facture facture, Client client) {
+  private Virment prepareVirment(VirmentRequest virmentRequest, Facture facture) {
     Virment virment = new Virment();
-    virment.setClient(client);
     virment.setFacture(facture);
     virment.setPrix(virmentRequest.getPrix());
     return virment;

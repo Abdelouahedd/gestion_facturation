@@ -13,8 +13,6 @@ public interface VirmentMapper {
 
     @Mapping(source = "facture.total",target = "total")
     @Mapping(source = "facture.document",target = "document")
-    @Mapping(source = "client.nom",target = "nom")
-    @Mapping(source = "client.prenom",target = "prenom")
     @Mapping(source = "prix",target = "virment")
     VirmentDto virmentToVirmentDTO(Virment virment);
 }

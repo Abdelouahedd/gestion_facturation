@@ -1,5 +1,6 @@
 package com.ae.gestion.facture.facture.domaine;
 
+import com.ae.gestion.facture.client.domaine.Client;
 import com.ae.gestion.facture.commun.domaine.AbstractAuditingEntity;
 import com.ae.gestion.facture.document.domaine.Document;
 import com.ae.gestion.facture.virement.domaine.Virment;
@@ -36,5 +37,8 @@ public class Facture extends AbstractAuditingEntity {
   private Boolean complete = false;
   @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Virment> virments = new ArrayList<>();
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "client_id")
+  private Client client;
 
 }
