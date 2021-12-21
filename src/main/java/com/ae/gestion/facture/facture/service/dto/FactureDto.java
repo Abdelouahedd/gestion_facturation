@@ -11,7 +11,7 @@ public class FactureDto implements Serializable {
   private final StateEnum state;
   private final Long id;
   private final Double total;
-  private final Long documentIdId;
+  private final Long documentId;
   private final Boolean complete;
   private final Instant createdDate;
 }

@@ -9,6 +9,7 @@ import org.mapstruct.*;
 public interface FactureMapper {
   Facture factureRequestToFacture(FactureRequest factureRequest);
 
+  @Mapping(source = "document.id",target = "documentId")
   FactureDto factureToFactureDto(Facture facture);
 
   FactureRequest factureToFactureRequest(Facture facture);
