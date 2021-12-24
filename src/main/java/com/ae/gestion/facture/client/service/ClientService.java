@@ -14,9 +14,9 @@ public interface ClientService {
 
   Client getClient(Long id);
 
-  Page<Client> getClient(Specification specification, Pageable pageable) ;
+  Page<Client> getClient(Specification<Client> specification, Pageable pageable) ;
 
-  List<Client> getClients();
+  List<Client> getClients(Specification<Client> specification);
 
   Page<Client> getClients(Pageable pageable);
 

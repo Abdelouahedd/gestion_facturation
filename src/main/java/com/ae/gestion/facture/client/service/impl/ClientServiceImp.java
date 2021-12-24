@@ -3,7 +3,6 @@ package com.ae.gestion.facture.client.service.impl;
 import com.ae.gestion.facture.client.domaine.Client;
 import com.ae.gestion.facture.client.repository.ClientRepository;
 import com.ae.gestion.facture.client.service.ClientService;
-import com.ae.gestion.facture.commun.domaine.StateEnum;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -40,14 +39,14 @@ public class ClientServiceImp implements ClientService {
   }
 
   @Override
-  public Page<Client> getClient(Specification specification, Pageable pageable) {
+  public Page<Client> getClient(Specification<Client> specification, Pageable pageable) {
     return this.clientRepository.findAll(specification,pageable);
   }
 
   @Override
-  public List<Client> getClients() {
+  public List<Client> getClients(Specification<Client> specification) {
     log.info("getClients : ");
-    return this.clientRepository.findAll();
+    return this.clientRepository.findAll(specification);
   }
 
   @Override
