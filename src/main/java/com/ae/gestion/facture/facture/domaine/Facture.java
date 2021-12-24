@@ -32,7 +32,6 @@ public class Facture extends AbstractAuditingEntity {
   private Double total;
   @OneToOne(targetEntity = Document.class, cascade = CascadeType.ALL)
   @JoinColumn(name = "document_id")
-  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   private Document document;
   private Boolean complete = false;
   @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -14,4 +14,5 @@ public class FactureDto implements Serializable {
   private final Long documentId;
   private final Boolean complete;
   private final Instant createdDate;
+  private final String nom;
 }

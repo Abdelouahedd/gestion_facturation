@@ -10,6 +10,7 @@ public interface FactureMapper {
   Facture factureRequestToFacture(FactureRequest factureRequest);
 
   @Mapping(source = "document.id",target = "documentId")
+  @Mapping(source = "client.nom",target = "nom")
   FactureDto factureToFactureDto(Facture facture);
 
   FactureRequest factureToFactureRequest(Facture facture);
