@@ -10,7 +10,9 @@ import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,11 +30,11 @@ public class VirmentRestController {
     public Page<VirmentDto> getVirmentBySearch(
             @Or(
                     {
-                            @Spec(path = "client.nom", params = "q", spec = LikeIgnoreCase.class),
-                            @Spec(path = "client.prenom", params = "q", spec = LikeIgnoreCase.class)
+                            @Spec(path = "facture.client.nom", params = "q", spec = LikeIgnoreCase.class),
+                            @Spec(path = "facture.client.prenom", params = "q", spec = LikeIgnoreCase.class)
                     }
             ) Specification<Virment> specification,
-            Pageable pageable
+            @PageableDefault(sort = "facture.id", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         return this.virmentService.getVirment(specification, pageable);
     }
