@@ -14,18 +14,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/api")
 @AllArgsConstructor
 public class ClientRestController {
   private final ClientService clientService;
 
-/*
-  @GetMapping(path = "/clients")
-  public Page<Client> getAllClient(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-    return this.clientService.getClients(pageable);
-  }
-*/
 
   @GetMapping(path = "/client/{id}")
   public ResponseEntity<Client> getClientById(@PathVariable("id") Long id) {
@@ -38,8 +34,18 @@ public class ClientRestController {
     @Or({
       @Spec(path = "nom", params = "q", spec = LikeIgnoreCase.class),
       @Spec(path = "prenom", params = "q", spec = LikeIgnoreCase.class)
-    }) Specification<Client> specification,@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+    }) Specification<Client> specification, @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
     Page<Client> client = this.clientService.getClient(specification, pageable);
+    return ResponseEntity.ok(client);
+  }
+
+  @GetMapping(path = "/list/clients")
+  public ResponseEntity<List<Client>> getClientWithSearch(
+    @Or({
+      @Spec(path = "nom", params = "q", spec = LikeIgnoreCase.class),
+      @Spec(path = "prenom", params = "q", spec = LikeIgnoreCase.class)
+    }) Specification<Client> specification) {
+    List<Client> client = this.clientService.getClients(specification);
     return ResponseEntity.ok(client);
   }
 

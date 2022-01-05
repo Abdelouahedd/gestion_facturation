@@ -44,7 +44,8 @@ public class FactureRestController {
   public ResponseEntity<Page<FactureDto>> getFactures(
     @Or({
       @Spec(path = "total", params = "total", spec = Equal.class),
-      @Spec(path = "complete", params = "complete", spec = Equal.class)
+      @Spec(path = "complete", params = "complete", spec = Equal.class),
+      @Spec(path = "client.nom", params = "client", spec = Equal.class),
     })
       Specification<Facture>specification, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
     Page<FactureDto>factures = this.factureService.findAll(specification, pageable);

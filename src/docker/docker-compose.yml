@@ -2,7 +2,7 @@ version: '2'
 
 services:
   db-gestion-facture:
-    image: postgres
+    image: postgres:14.1
     environment:
       - POSTGRES_USER=web-api
       - POSTGRES_PASSWORD=

@@ -1,7 +1,5 @@
 package com.ae.gestion.facture.virement.service.impl;
 
-import com.ae.gestion.facture.client.domaine.Client;
-import com.ae.gestion.facture.client.service.ClientService;
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.repository.FactureRepository;
 import com.ae.gestion.facture.virement.domaine.Virment;
