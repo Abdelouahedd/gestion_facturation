@@ -22,6 +22,15 @@ public class VirmentServiceImpl implements VirmentService {
   private final VirmentMapper virmentMapper;
 
   @Override
+  public VirmentDto updateVirment(VirmentRequest virmentRequest, Long id) {
+    Virment virment = virmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Virment not found"));
+    Facture facture = factureRepository.getOne(virmentRequest.getIdFacture());
+    virment.setFacture(facture);
+    virment.setPrix(virmentRequest.getPrix());
+    return this.virmentMapper.virmentToVirmentDTO(this.virmentRepository.saveAndFlush(virment));
+  }
+
+  @Override
   public VirmentDto addVirment(VirmentRequest virmentRequest) {
     Facture facture = this.factureRepository.getOne(virmentRequest.getIdFacture());
     Virment virment = prepareVirment(virmentRequest, facture);
@@ -33,6 +42,11 @@ public class VirmentServiceImpl implements VirmentService {
     return this.virmentRepository
       .findAll(specification, pageable)
       .map(this.virmentMapper::virmentToVirmentDTO);
+  }
+
+  @Override
+  public void deleteVirment(Long id) {
+    this.virmentRepository.deleteById(id);
   }
 
   private Virment prepareVirment(VirmentRequest virmentRequest, Facture facture) {

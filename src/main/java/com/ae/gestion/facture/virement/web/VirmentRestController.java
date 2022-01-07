@@ -13,29 +13,42 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
 public class VirmentRestController {
-    private final VirmentService virmentService;
+  private final VirmentService virmentService;
 
-    @PostMapping("/virment")
-    public VirmentDto addVirment(@RequestBody VirmentRequest virmentRequest) {
-        return this.virmentService.addVirment(virmentRequest);
-    }
+  @PostMapping("/virment")
+  public VirmentDto addVirment(@RequestBody VirmentRequest virmentRequest) {
+    return this.virmentService.addVirment(virmentRequest);
+  }
 
-    @GetMapping("/virments")
-    public Page<VirmentDto> getVirmentBySearch(
-            @Or(
-                    {
-                            @Spec(path = "facture.client.nom", params = "q", spec = LikeIgnoreCase.class),
-                            @Spec(path = "facture.client.prenom", params = "q", spec = LikeIgnoreCase.class)
-                    }
-            ) Specification<Virment> specification,
-            @PageableDefault(sort = "facture.id", direction = Sort.Direction.DESC) Pageable pageable
-    ) {
-        return this.virmentService.getVirment(specification, pageable);
-    }
+  @PutMapping("/virment/{id}")
+  public VirmentDto updateVirment(@RequestBody VirmentRequest virmentRequest, @PathVariable("id") Long id) {
+    return this.virmentService.updateVirment(virmentRequest, id);
+  }
+
+  @DeleteMapping("/virment/{id}")
+  public ResponseEntity<Void>deletVirment(@PathVariable("id") Long id){
+    this.virmentService.deleteVirment(id);
+    return ResponseEntity.noContent().build();
+  }
+
+
+  @GetMapping("/virments")
+  public Page<VirmentDto> getVirmentBySearch(
+    @Or(
+      {
+        @Spec(path = "facture.client.nom", params = "q", spec = LikeIgnoreCase.class),
+        @Spec(path = "facture.client.prenom", params = "q", spec = LikeIgnoreCase.class)
+      }
+    ) Specification<Virment> specification,
+    @PageableDefault(sort = "facture.id", direction = Sort.Direction.DESC) Pageable pageable
+  ) {
+    return this.virmentService.getVirment(specification, pageable);
+  }
 }

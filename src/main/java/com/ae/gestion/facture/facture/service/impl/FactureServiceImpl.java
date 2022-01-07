@@ -15,7 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -76,5 +78,12 @@ public class FactureServiceImpl implements FactureService {
   }
 
 
-
+  @Override
+  public List<FactureDto> getListFacture(Specification<Facture> specification) {
+    return this.factureRepository
+      .findAll(specification)
+      .stream()
+      .map(factureMapper::factureToFactureDto)
+      .collect(Collectors.toList());
+  }
 }

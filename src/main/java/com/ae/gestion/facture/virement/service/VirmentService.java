@@ -9,7 +9,11 @@ import org.springframework.data.jpa.domain.Specification;
 
 
 public interface VirmentService {
-    VirmentDto addVirment(VirmentRequest virmentRequest);
+  VirmentDto addVirment(VirmentRequest virmentRequest);
 
-    Page<VirmentDto> getVirment(Specification<Virment> specification, Pageable pageable);
+  VirmentDto updateVirment(VirmentRequest virmentRequest, Long id);
+
+  Page<VirmentDto> getVirment(Specification<Virment> specification, Pageable pageable);
+
+  void deleteVirment(Long id);
 }
