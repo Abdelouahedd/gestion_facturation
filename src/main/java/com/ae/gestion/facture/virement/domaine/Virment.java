@@ -17,7 +17,7 @@ public class Virment extends AbstractAuditingEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "facture_id")
   private Facture facture;
   private Double prix;
