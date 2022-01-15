@@ -67,4 +67,10 @@ public class ClientRestController {
     return ResponseEntity.noContent().build();
   }
 
+  @GetMapping(path = "/clients/count")
+  public ResponseEntity<Long> getCountClient() {
+    Long nbrClients = this.clientService.getNbrClients();
+    return ResponseEntity.ok(nbrClients);
+  }
+
 }

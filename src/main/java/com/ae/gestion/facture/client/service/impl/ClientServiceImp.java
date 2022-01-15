@@ -59,4 +59,9 @@ public class ClientServiceImp implements ClientService {
   public void deleteClient(Long id) {
     this.clientRepository.deleteById(id);
   }
+
+  @Override
+  public Long getNbrClients() {
+    return this.clientRepository.count();
+  }
 }
