@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -101,5 +102,10 @@ public class FactureServiceImpl implements FactureService {
   @Override
   public Long getCountBills() {
     return this.factureRepository.count();
+  }
+
+  @Override
+  public BigDecimal getTotalPrix() {
+    return this.factureRepository.getTotalPriceOfAllBills();
   }
 }

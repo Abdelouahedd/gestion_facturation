@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,4 +28,7 @@ public interface FactureRepository extends JpaRepository<Facture, Long>, JpaSpec
   @Query(value = "select count(id) as number,to_char(created_date  ,'TMMonth') as month,to_char(created_date  ,'MM') as order_month from facture " +
                  "where to_char(created_date,'YYYY') = :year and state <> 'DELETED' group by month,order_month order by order_month", nativeQuery = true)
   List<FactureMonth> getNumberFactureByMonth(@Param("year") String year);
+
+  @Query("SELECT SUM(f.total) from Facture f")
+  BigDecimal getTotalPriceOfAllBills();
 }

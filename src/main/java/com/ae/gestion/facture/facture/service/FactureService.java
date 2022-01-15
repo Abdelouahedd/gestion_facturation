@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface FactureService {
@@ -31,4 +32,6 @@ public interface FactureService {
   List<FactureMonth> getNumberFactureByMonth(String year);
 
   Long getCountBills();
+
+  BigDecimal getTotalPrix();
 }

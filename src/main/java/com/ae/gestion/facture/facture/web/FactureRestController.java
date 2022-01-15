@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -90,5 +91,11 @@ public class FactureRestController {
   public ResponseEntity<Long> getCountFacture() {
     Long countBills = this.factureService.getCountBills();
     return ResponseEntity.ok(countBills);
+  }
+
+  @GetMapping(path = "/factures/price")
+  public ResponseEntity<BigDecimal> getTotalPrice() {
+    BigDecimal totalPrix = this.factureService.getTotalPrix();
+    return ResponseEntity.ok(totalPrix);
   }
 }
