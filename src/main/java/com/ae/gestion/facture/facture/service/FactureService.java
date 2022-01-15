@@ -26,6 +26,9 @@ public interface FactureService {
 
   void deleteFacture(Long id);
 
-  List<String>getDatesFacture();
+  List<String> getDatesFacture();
+
   List<FactureMonth> getNumberFactureByMonth(String year);
+
+  Long getCountBills();
 }

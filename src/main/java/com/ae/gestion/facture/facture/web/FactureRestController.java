@@ -79,9 +79,16 @@ public class FactureRestController {
     List<String> datesFacture = this.factureService.getDatesFacture();
     return ResponseEntity.ok(datesFacture);
   }
+
   @GetMapping(path = "/facture/month")
   public ResponseEntity<List<FactureMonth>> getDateFactures(@RequestParam("year") String year) {
     List<FactureMonth> numberFactureByMonth = this.factureService.getNumberFactureByMonth(year);
     return ResponseEntity.ok(numberFactureByMonth);
+  }
+
+  @GetMapping(path = "/factures/count")
+  public ResponseEntity<Long> getCountFacture() {
+    Long countBills = this.factureService.getCountBills();
+    return ResponseEntity.ok(countBills);
   }
 }

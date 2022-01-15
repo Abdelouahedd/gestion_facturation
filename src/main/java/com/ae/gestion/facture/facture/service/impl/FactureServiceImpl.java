@@ -97,4 +97,9 @@ public class FactureServiceImpl implements FactureService {
   public List<FactureMonth> getNumberFactureByMonth(String year) {
     return this.factureRepository.getNumberFactureByMonth(year);
   }
+
+  @Override
+  public Long getCountBills() {
+    return this.factureRepository.count();
+  }
 }

@@ -25,6 +25,6 @@ public interface FactureRepository extends JpaRepository<Facture, Long>, JpaSpec
   List<String> getDateFactures();
 
   @Query(value = "select count(id) as number,to_char(created_date  ,'TMMonth') as month,to_char(created_date  ,'MM') as order_month from facture " +
-                 "where to_char(created_date,'YYYY') = :year group by month,order_month order by order_month", nativeQuery = true)
+                 "where to_char(created_date,'YYYY') = :year and state <> 'DELETED' group by month,order_month order by order_month", nativeQuery = true)
   List<FactureMonth> getNumberFactureByMonth(@Param("year") String year);
 }
