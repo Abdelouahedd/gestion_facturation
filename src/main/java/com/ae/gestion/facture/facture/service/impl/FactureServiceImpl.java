@@ -6,6 +6,7 @@ import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.repository.FactureRepository;
 import com.ae.gestion.facture.facture.service.FactureService;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
+import com.ae.gestion.facture.facture.service.dto.FactureMonth;
 import com.ae.gestion.facture.facture.service.dto.mapper.FactureMapper;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import lombok.AllArgsConstructor;
@@ -85,5 +86,15 @@ public class FactureServiceImpl implements FactureService {
       .stream()
       .map(factureMapper::factureToFactureDto)
       .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<String> getDatesFacture() {
+    return this.factureRepository.getDateFactures();
+  }
+
+  @Override
+  public List<FactureMonth> getNumberFactureByMonth(String year) {
+    return this.factureRepository.getNumberFactureByMonth(year);
   }
 }

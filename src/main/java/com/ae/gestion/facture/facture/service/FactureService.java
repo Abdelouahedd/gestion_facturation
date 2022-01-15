@@ -3,6 +3,7 @@ package com.ae.gestion.facture.facture.service;
 
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
+import com.ae.gestion.facture.facture.service.dto.FactureMonth;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,4 +25,7 @@ public interface FactureService {
   List<FactureDto> getListFacture(Specification<Facture> specification);
 
   void deleteFacture(Long id);
+
+  List<String>getDatesFacture();
+  List<FactureMonth> getNumberFactureByMonth(String year);
 }
