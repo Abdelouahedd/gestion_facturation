@@ -3,6 +3,7 @@ package com.ae.gestion.facture.facture.web;
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.service.FactureService;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
+import com.ae.gestion.facture.facture.service.dto.FactureMonth;
 import com.ae.gestion.facture.facture.service.dto.mapper.FactureMapper;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import lombok.AllArgsConstructor;
@@ -71,5 +72,16 @@ public class FactureRestController {
       Specification<Facture> specification) {
     List<FactureDto> listFacture = this.factureService.getListFacture(specification);
     return ResponseEntity.ok(listFacture);
+  }
+
+  @GetMapping(path = "/facture/dates")
+  public ResponseEntity<List<String>> getDateFactures() {
+    List<String> datesFacture = this.factureService.getDatesFacture();
+    return ResponseEntity.ok(datesFacture);
+  }
+  @GetMapping(path = "/facture/month")
+  public ResponseEntity<List<FactureMonth>> getDateFactures(@RequestParam("year") String year) {
+    List<FactureMonth> numberFactureByMonth = this.factureService.getNumberFactureByMonth(year);
+    return ResponseEntity.ok(numberFactureByMonth);
   }
 }
