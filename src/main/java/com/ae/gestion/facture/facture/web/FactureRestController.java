@@ -2,8 +2,10 @@ package com.ae.gestion.facture.facture.web;
 
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.service.FactureService;
+import com.ae.gestion.facture.facture.service.dto.FactureComplete;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
 import com.ae.gestion.facture.facture.service.dto.FactureMonth;
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.facture.service.dto.mapper.FactureMapper;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import lombok.AllArgsConstructor;
@@ -97,5 +99,17 @@ public class FactureRestController {
   public ResponseEntity<BigDecimal> getTotalPrice() {
     BigDecimal totalPrix = this.factureService.getTotalPrix();
     return ResponseEntity.ok(totalPrix);
+  }
+
+  @GetMapping(path = "/factures/complete/number")
+  public ResponseEntity<List<FactureComplete>> getNumberFactureByStatus() {
+    List<FactureComplete> numberFactureByStatus = this.factureService.getNumberFactureByStatus();
+    return ResponseEntity.ok(numberFactureByStatus);
+  }
+
+  @GetMapping(path = "/factures/total/month")
+  public ResponseEntity<List<TotalPerMonth>> getTotalFactureByMonth() {
+    List<TotalPerMonth> totalFacturePerMonth = this.factureService.getTotalFacturePerMonth();
+    return ResponseEntity.ok(totalFacturePerMonth);
   }
 }

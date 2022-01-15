@@ -2,8 +2,10 @@ package com.ae.gestion.facture.facture.service;
 
 
 import com.ae.gestion.facture.facture.domaine.Facture;
+import com.ae.gestion.facture.facture.service.dto.FactureComplete;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
 import com.ae.gestion.facture.facture.service.dto.FactureMonth;
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,4 +36,9 @@ public interface FactureService {
   Long getCountBills();
 
   BigDecimal getTotalPrix();
+
+  List<FactureComplete> getNumberFactureByStatus();
+
+  List<TotalPerMonth> getTotalFacturePerMonth();
+
 }

@@ -1,5 +1,6 @@
 package com.ae.gestion.facture.virement.web;
 
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.virement.domaine.Virment;
 import com.ae.gestion.facture.virement.service.VirmentService;
 import com.ae.gestion.facture.virement.service.dto.VirmentDto;
@@ -15,6 +16,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -33,7 +36,7 @@ public class VirmentRestController {
   }
 
   @DeleteMapping("/virment/{id}")
-  public ResponseEntity<Void>deletVirment(@PathVariable("id") Long id){
+  public ResponseEntity<Void> deletVirment(@PathVariable("id") Long id) {
     this.virmentService.deleteVirment(id);
     return ResponseEntity.noContent().build();
   }
@@ -50,5 +53,10 @@ public class VirmentRestController {
     @PageableDefault(sort = "facture.id", direction = Sort.Direction.DESC) Pageable pageable
   ) {
     return this.virmentService.getVirment(specification, pageable);
+  }
+
+  @GetMapping("/virments/total/month")
+  public List<TotalPerMonth> getTotalVirmentPerMonth() {
+    return this.virmentService.getTotalVirmentPerMonth();
   }
 }

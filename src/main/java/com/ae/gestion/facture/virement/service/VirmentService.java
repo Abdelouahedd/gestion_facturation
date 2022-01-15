@@ -1,11 +1,14 @@
 package com.ae.gestion.facture.virement.service;
 
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.virement.domaine.Virment;
 import com.ae.gestion.facture.virement.service.dto.VirmentDto;
 import com.ae.gestion.facture.virement.web.request.VirmentRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+
+import java.util.List;
 
 
 public interface VirmentService {
@@ -16,4 +19,6 @@ public interface VirmentService {
   Page<VirmentDto> getVirment(Specification<Virment> specification, Pageable pageable);
 
   void deleteVirment(Long id);
+
+  List<TotalPerMonth> getTotalVirmentPerMonth();
 }

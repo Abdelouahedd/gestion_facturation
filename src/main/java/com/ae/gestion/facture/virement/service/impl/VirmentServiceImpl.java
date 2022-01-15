@@ -2,6 +2,7 @@ package com.ae.gestion.facture.virement.service.impl;
 
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.repository.FactureRepository;
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.virement.domaine.Virment;
 import com.ae.gestion.facture.virement.repository.VirmentRepository;
 import com.ae.gestion.facture.virement.service.VirmentService;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -54,5 +57,10 @@ public class VirmentServiceImpl implements VirmentService {
     virment.setFacture(facture);
     virment.setPrix(virmentRequest.getPrix());
     return virment;
+  }
+
+  @Override
+  public List<TotalPerMonth> getTotalVirmentPerMonth() {
+    return this.virmentRepository.getTotalVirmentPerMonth();
   }
 }

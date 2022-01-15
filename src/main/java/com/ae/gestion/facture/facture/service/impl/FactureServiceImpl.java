@@ -5,8 +5,10 @@ import com.ae.gestion.facture.document.service.DocumentService;
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.repository.FactureRepository;
 import com.ae.gestion.facture.facture.service.FactureService;
+import com.ae.gestion.facture.facture.service.dto.FactureComplete;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
 import com.ae.gestion.facture.facture.service.dto.FactureMonth;
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.facture.service.dto.mapper.FactureMapper;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import lombok.AllArgsConstructor;
@@ -107,5 +109,15 @@ public class FactureServiceImpl implements FactureService {
   @Override
   public BigDecimal getTotalPrix() {
     return this.factureRepository.getTotalPriceOfAllBills();
+  }
+
+  @Override
+  public List<FactureComplete> getNumberFactureByStatus() {
+    return this.factureRepository.getNumberFactureByStatus();
+  }
+
+  @Override
+  public List<TotalPerMonth> getTotalFacturePerMonth() {
+    return this.factureRepository.getTotalFacturePerMonth();
   }
 }
