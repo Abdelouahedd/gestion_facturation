@@ -5,8 +5,10 @@ import com.ae.gestion.facture.document.service.DocumentService;
 import com.ae.gestion.facture.facture.domaine.Facture;
 import com.ae.gestion.facture.facture.repository.FactureRepository;
 import com.ae.gestion.facture.facture.service.FactureService;
+import com.ae.gestion.facture.facture.service.dto.FactureComplete;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
 import com.ae.gestion.facture.facture.service.dto.FactureMonth;
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.facture.service.dto.mapper.FactureMapper;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -96,5 +99,25 @@ public class FactureServiceImpl implements FactureService {
   @Override
   public List<FactureMonth> getNumberFactureByMonth(String year) {
     return this.factureRepository.getNumberFactureByMonth(year);
+  }
+
+  @Override
+  public Long getCountBills() {
+    return this.factureRepository.count();
+  }
+
+  @Override
+  public BigDecimal getTotalPrix() {
+    return this.factureRepository.getTotalPriceOfAllBills();
+  }
+
+  @Override
+  public List<FactureComplete> getNumberFactureByStatus() {
+    return this.factureRepository.getNumberFactureByStatus();
+  }
+
+  @Override
+  public List<TotalPerMonth> getTotalFacturePerMonth() {
+    return this.factureRepository.getTotalFacturePerMonth();
   }
 }

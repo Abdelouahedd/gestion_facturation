@@ -2,13 +2,16 @@ package com.ae.gestion.facture.facture.service;
 
 
 import com.ae.gestion.facture.facture.domaine.Facture;
+import com.ae.gestion.facture.facture.service.dto.FactureComplete;
 import com.ae.gestion.facture.facture.service.dto.FactureDto;
 import com.ae.gestion.facture.facture.service.dto.FactureMonth;
+import com.ae.gestion.facture.facture.service.dto.TotalPerMonth;
 import com.ae.gestion.facture.facture.web.request.FactureRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface FactureService {
@@ -26,6 +29,16 @@ public interface FactureService {
 
   void deleteFacture(Long id);
 
-  List<String>getDatesFacture();
+  List<String> getDatesFacture();
+
   List<FactureMonth> getNumberFactureByMonth(String year);
+
+  Long getCountBills();
+
+  BigDecimal getTotalPrix();
+
+  List<FactureComplete> getNumberFactureByStatus();
+
+  List<TotalPerMonth> getTotalFacturePerMonth();
+
 }
