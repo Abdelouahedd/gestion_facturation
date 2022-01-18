@@ -1,7 +1,9 @@
-version: '2'
+version: '3'
 
 services:
   db-gestion-facture:
+    image: db-facture:latest
+    container_name: db-gestion-facture
     build:
       context: .
       dockerfile: postgres.Dockerfile
@@ -10,6 +12,36 @@ services:
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - ~/volumes/gestion/facturation/web-api/postgresql/:/var/lib/postgresql/data/
+    restart: always
+    networks:
+      - api-network
+
+
+  back-gestion-facture:
+    image: back-facture:latest
+    container_name: back-gestion-facture
+    build:
+      context: ../../src/..
+      dockerfile: back.DockerFile
+    environment:
+      spring_datasource_url: 'jdbc:postgresql://db-gestion-facture:5432/web-api'
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db-gestion-facture
+    networks:
+      - api-network
+
+
+networks:
+#   shared:
+#     external:
+#        name: gestion-facture
+  api-network:
+    driver: bridge
+#    external:
+#      name: gestion-facture
+
