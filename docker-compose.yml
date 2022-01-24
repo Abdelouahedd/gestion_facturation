@@ -24,7 +24,7 @@ services:
     image: back-facture:latest
     container_name: back-gestion-facture
     build:
-      context: ../../src/..
+      context: .
       dockerfile: back.DockerFile
     environment:
       spring_datasource_url: 'jdbc:postgresql://db-gestion-facture:5432/web-api'
@@ -37,11 +37,6 @@ services:
 
 
 networks:
-#   shared:
-#     external:
-#        name: gestion-facture
   api-network:
     driver: bridge
-#    external:
-#      name: gestion-facture
 
