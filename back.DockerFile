@@ -1,11 +1,11 @@
-FROM maven:3.6-adoptopenjdk-11 as build
+FROM maven:3.8-jdk-11 as build
 WORKDIR /app
-COPY . /app
+COPY pom.xml pom.xml
+COPY src src
 RUN mvn clean compile
-RUN mvn clean package
+RUN mvn  package -DskipTests
 
-FROM adoptopenjdk:11-jdk
-WORKDIR /app
-COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app
+FROM openjdk:11
+COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 9000
-CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
