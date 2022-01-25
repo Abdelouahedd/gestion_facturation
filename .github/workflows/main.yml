@@ -54,10 +54,4 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-         cd /home/azureuser
-         pwd
-         cd gestion_facturation
-         git pull origin dev
-         docker stop $(docker ps -q)
-         docker-compose -f docker-compose.yml down 
-         docker-compose -f docker-compose.yml up -d --build
+         az vm run-command invoke -g myvm_group -n myvm --command-id RunShellScript --scripts "docker ps -a"
