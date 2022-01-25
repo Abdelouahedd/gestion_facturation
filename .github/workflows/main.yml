@@ -40,5 +40,5 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-         az vm run-command invoke -g myvm_group -n myvm --command-id RunShellScript --scripts \
-         "pws && cd gestion_facturation && ddocker-compose up --build -d"
+         az vm run-command invoke -g myvm_group -n myvm --command-id RunShellScript --scripts 
+         "pwd && cd gestion_facturation && ddocker-compose up --build -d"
