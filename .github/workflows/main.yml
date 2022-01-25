@@ -54,7 +54,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-         az account show
+         ls -al /home/runner/work/gestion_facturation/gestion_facturation
          pwd
          docker-compose -f docker-compose.yml down 
          docker-compose -f docker-compose.yml up -d --build
