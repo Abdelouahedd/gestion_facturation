@@ -54,7 +54,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-         az account show
+         ls -al
          pwd
          docker-compose -f docker-compose.yml down 
          docker-compose -f docker-compose.yml up -d --build
