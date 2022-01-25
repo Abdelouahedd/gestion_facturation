@@ -54,6 +54,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-        az webapp list --query "[?state=='Running']"
-        | docker-compose -f docker-compose.yml down |
-        docker-compose -f docker-compose.yml up -d --build
+         az account show
+         pwd
+         docker-compose -f docker-compose.yml down 
+         docker-compose -f docker-compose.yml up -d --build
