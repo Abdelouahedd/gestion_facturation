@@ -54,7 +54,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - run: |
-         ls -al /home/runner/work/gestion_facturation/gestion_facturation
+         cd /home/azureuser
          pwd
+         cd gestion_facturation
+         git pull origin dev
+         docker stop $(docker ps -q)
          docker-compose -f docker-compose.yml down 
          docker-compose -f docker-compose.yml up -d --build
